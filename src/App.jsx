@@ -5,7 +5,6 @@ import Home from "./Components/home/Home";
 import Footer from "./Components/Footer";
 import ContactUs from "./Components/Contact-us/ContactUs";
 import Men from "./Components/products/Men";
-import Women from "./Components/products/Women";
 import Kids from "./Components/products/Kids";
 import ProductsPage from "./Components/products/ProductsPage";
 import ShoppingCart from "./Components/shopping/ShoppingCart";
@@ -15,6 +14,7 @@ import AllProducts from "./Components/admine/pages/AllProducts";
 import AddProduct from "./Components/admine/pages/AddProduct";
 import EditDeleteProduct from "./Components/admine/pages/EditDeleteProduct";
 import EditProduct from "./Components/admine/pages/EditProduct";
+import Women from "./Components/products/Women";
 
 const App = () => {
   const location = useLocation();

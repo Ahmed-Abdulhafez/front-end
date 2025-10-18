@@ -1,10 +1,13 @@
-import { Link } from "react-router";
-import { ProductContext } from "../prodoctContextApi/ContextApi";
 import React, { useContext } from "react";
+import { ProductContext } from "../prodoctContextApi/ContextApi";
+import { Link } from "react-router";
 
 const Women = () => {
   const { product, setSelect, addToCart } = useContext(ProductContext);
-  const products = product.women;
+
+  // تصفية المنتجات لاختيار منتجات الرجال فقط
+
+  const products = product.men || [];
 
   const handleAddToCart = (product) => {
     addToCart(product);
