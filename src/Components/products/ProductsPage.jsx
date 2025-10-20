@@ -123,24 +123,30 @@ const ProductsPage = () => {
               {/* الصورة الرئيسية */}
               <div className="bg-slate-50 rounded-2xl p-8 border border-slate-200">
                 <div className="aspect-square max-w-md mx-auto">
-<img
-  src={
-    typeof (thumbnail?.url || thumbnail) === "string"
-      ? (thumbnail.url || thumbnail).startsWith("http")
-        ? thumbnail.url || thumbnail
-        : `https://my-app-bacg-end.vercel.app/${(thumbnail.url || thumbnail).replace(/^\/+/, "")}`
-      : imagesArray[0]
-      ? typeof (imagesArray[0]?.url || imagesArray[0]) === "string"
-        ? (imagesArray[0].url || imagesArray[0]).startsWith("http")
-          ? imagesArray[0].url || imagesArray[0]
-          : `https://my-app-bacg-end.vercel.app/${(imagesArray[0].url || imagesArray[0]).replace(/^\/+/, "")}`
-        : "/placeholder.png"
-      : "/placeholder.png"
-  }
-  alt={selsct.title || "Product Image"}
-  className="w-full h-full object-contain rounded-xl transition-all duration-500 hover:scale-105"
-/>
-
+                  <img
+                    src={
+                      typeof (thumbnail?.url || thumbnail) === "string"
+                        ? (thumbnail.url || thumbnail).startsWith("http")
+                          ? thumbnail.url || thumbnail
+                          : `https://my-app-bacg-end.vercel.app/${(
+                              thumbnail.url || thumbnail
+                            ).replace(/^\/+/, "")}`
+                        : imagesArray[0]
+                        ? typeof (imagesArray[0]?.url || imagesArray[0]) ===
+                          "string"
+                          ? (imagesArray[0].url || imagesArray[0]).startsWith(
+                              "http"
+                            )
+                            ? imagesArray[0].url || imagesArray[0]
+                            : `https://my-app-bacg-end.vercel.app/${(
+                                imagesArray[0].url || imagesArray[0]
+                              ).replace(/^\/+/, "")}`
+                          : "/placeholder.png"
+                        : "/placeholder.png"
+                    }
+                    alt={selsct.title || "Product Image"}
+                    className="w-full h-full object-contain rounded-xl transition-all duration-500 hover:scale-105"
+                  />
                 </div>
               </div>
 

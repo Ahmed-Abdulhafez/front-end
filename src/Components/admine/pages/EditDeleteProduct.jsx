@@ -194,7 +194,8 @@ const EditDeleteProduct = () => {
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-3 space-x-reverse">
                           <img
-                            src={product.images?.[0] || "/placeholder-image.jpg"}
+                            src={product.images?.[0]?.url || "/placeholder-image.jpg"}
+
                             alt={product.title}
                             className="w-12 h-12 rounded-lg object-cover bg-gray-100"
                           />

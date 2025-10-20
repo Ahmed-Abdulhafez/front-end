@@ -47,13 +47,13 @@ const EditProduct = () => {
 
         // 🟢 1. جلب بيانات المنتج
         const productRes = await axios.get(
-          `http://localhost:5000/products/${id}`
+          `https://my-app-bacg-end.vercel.app/products/${id}`
         );
         const product = productRes.data;
 
         // 🟢 2. جلب الفئات من السيرفر (يفضل بدلاً من كتابة predefinedCategories يدويًا)
         const categoryRes = await axios.get(
-          "http://localhost:5000/category/getCategory"
+          "https://my-app-bacg-end.vercel.app/category/getCategory"
         );
         setCategories(categoryRes.data);
 
@@ -83,7 +83,7 @@ const EditProduct = () => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
 
-    if (files.length + previews.length > 5) {
+    if (files.length + previews.length > 10) {
       setErrors((prev) => ({ ...prev, images: "يمكنك رفع 5 صور كحد أقصى" }));
       return;
     }
@@ -184,7 +184,7 @@ const EditProduct = () => {
       };
 
       const res = await axios.put(
-        `http://localhost:5000/products/${id}`,
+        `https://my-app-bacg-end.vercel.app/products/${id}`,
         updatedProduct
       );
 
@@ -455,28 +455,48 @@ const EditProduct = () => {
               {/* 🔹 تحميل الصور */}
               <div className="md:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  صور المنتج ({previews.length}/5)
+                  صور المنتج ({previews.length}/10)
                 </label>
 
                 {/* معاينة الصور */}
                 {previews.length > 0 && (
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-4">
-                    {previews.map((preview, index) => (
-                      <div key={index} className="relative group">
-                        <img
-                          src={preview}
-                          alt={`Preview ${index + 1}`}
-                          className="w-full h-24 object-cover rounded-lg border border-gray-200"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => removeImage(index)}
-                          className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
+                    {previews.map((preview, index) => {
+                      let imageSrc = "";
+
+                      // 🟢 الحالة 1: صورة من Cloudinary (كائن فيه url)
+                      if (preview?.url) {
+                        imageSrc = preview.url;
+
+                        // 🟢 الحالة 2: رابط مباشر (string يبدأ بـ https)
+                      } else if (
+                        typeof preview === "string" &&
+                        preview.startsWith("http")
+                      ) {
+                        imageSrc = preview;
+
+                        // 🟢 الحالة 3: ملف جديد (File)
+                      } else if (preview instanceof File) {
+                        imageSrc = URL.createObjectURL(preview);
+                      }
+
+                      return (
+                        <div key={index} className="relative group">
+                          <img
+                            src={imageSrc}
+                            alt={`Preview ${index + 1}`}
+                            className="w-full h-24 object-cover rounded-lg border border-gray-200"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => removeImage(index)}
+                            className="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
 

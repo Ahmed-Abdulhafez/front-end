@@ -6,8 +6,9 @@ import { ProductContext } from "../prodoctContextApi/ContextApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import { Link } from "react-router-dom";
+import ProductSkeleton from "../loading/ProductSkeleton";
 
-const SliderMan = ({ categoryName = "Women's" }) => {
+const SliderMan = ({ categoryName = "Kid's" }) => {
   const { product, setSelect } = useContext(ProductContext);
 
   // استخدام useMemo لتحسين الأداء
@@ -43,7 +44,7 @@ const SliderMan = ({ categoryName = "Women's" }) => {
     return (
       <section className="mx-5 md:mx-10 lg:mx-15 mt-10 select-none">
         <div className="mb-10 mt-5">
-          <h1 className="text-4xl font-bold mb-2">{categoryName}'s Latest</h1>
+          <h1 className="text-4xl font-bold mb-2">{categoryName} Latest</h1>
           <p className="text-gray-600">
             Details to details is what makes Hexashop different from the other
             themes.
@@ -67,7 +68,7 @@ const SliderMan = ({ categoryName = "Women's" }) => {
       {/* 🔹 Header Section */}
       <div className="mb-10 mt-5 text-center lg:text-left">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 text-gray-900">
-          {categoryName}'s Latest
+          {categoryName} Latest
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto lg:mx-0 text-base md:text-lg">
           Details to details is what makes Hexashop different from the other
@@ -193,17 +194,7 @@ const SliderMan = ({ categoryName = "Women's" }) => {
               </SwiperSlide>
             ))
           ) : (
-            <SwiperSlide>
-              <div className="text-center py-16 bg-gray-50 rounded-2xl">
-                <div className="text-6xl mb-4">📦</div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-2">
-                  No Featured Products
-                </h3>
-                <p className="text-gray-500">
-                  No featured products found in {categoryName} category.
-                </p>
-              </div>
-            </SwiperSlide>
+            <ProductSkeleton />
           )}
         </Swiper>
 
